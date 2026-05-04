@@ -15,5 +15,12 @@
     "@assistant-ui/react": "*",
     "lucide-react": "*",
     "sonner": "*"
+  },
+  "scripts": {
+    "test": "vitest run --passWithNoTests"
+  },
+  "devDependencies": {
+    "@papercusp/test-config": "*",
+    "vitest": "^4.1.4"
   }
 }
