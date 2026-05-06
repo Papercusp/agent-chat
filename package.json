@@ -11,16 +11,24 @@
     }
   },
   "peerDependencies": {
-    "react": "^18 || ^19",
     "@assistant-ui/react": "*",
     "lucide-react": "*",
+    "react": "^18 || ^19",
     "sonner": "*"
   },
   "scripts": {
-    "test": "vitest run --passWithNoTests"
+    "test": "vitest run --passWithNoTests",
+    "storybook": "storybook dev -p 6008",
+    "build-storybook": "storybook build -o storybook-static",
+    "lostpixel": "lost-pixel",
+    "lostpixel:update": "LOST_PIXEL_GENERATE_ONLY=1 lost-pixel"
   },
   "devDependencies": {
     "@papercusp/test-config": "*",
+    "@storybook/addon-docs": "^10.3.6",
+    "@storybook/react-vite": "^10.3.6",
+    "lost-pixel": "^3.22.0",
+    "storybook": "^10.3.6",
     "vitest": "^4.1.4"
   }
 }
