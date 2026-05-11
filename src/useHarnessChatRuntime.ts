@@ -30,9 +30,11 @@ function toThreadMessage(m: HarnessMsg, i: number): ThreadMessageLike {
   };
 }
 
-// Adapts our existing `claude -p --output-format stream-json` SSE wire format
-// (event: delta | event: done | event: error) into an assistant-ui external
-// store runtime. Messages round-trip through localStorage for persistence.
+// Adapts our existing agent CLI SSE wire format (event: delta | event: done |
+// event: error) into an assistant-ui external store runtime. The wire format
+// is the same regardless of backend — runAgentChat normalizes both omp -p
+// (--mode json) and claude -p (--output-format stream-json) into delta/done/error
+// SSE events upstream. Messages round-trip through localStorage for persistence.
 export function useHarnessChatRuntime(opts: Options) {
   const { slug, endpoint, storageKey, extraBody, onThreadTitleInferred } = opts;
 
