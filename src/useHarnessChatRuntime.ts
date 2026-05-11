@@ -6,6 +6,7 @@ import {
   type ThreadMessageLike,
   type AppendMessage,
 } from '@assistant-ui/react';
+import { parseSseStream } from '@restart/sse';
 
 export interface HarnessMsg {
   role: 'user' | 'assistant';
@@ -107,32 +108,16 @@ export function useHarnessChatRuntime(opts: Options) {
       });
       if (!res.ok || !res.body) throw new Error(`${res.status} ${await res.text().catch(() => '')}`);
 
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-      let buf = '';
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buf += decoder.decode(value, { stream: true });
-        let nl: number;
-        while ((nl = buf.indexOf('\n\n')) >= 0) {
-          const block = buf.slice(0, nl);
-          buf = buf.slice(nl + 2);
-          const lines = block.split('\n');
-          let event = 'message';
-          let data = '';
-          for (const l of lines) {
-            if (l.startsWith('event: ')) event = l.slice(7);
-            else if (l.startsWith('data: ')) data += l.slice(6);
-          }
-          const payload = data.replace(/\\n/g, '\n');
-          if (event === 'delta') {
-            accum += payload;
-            setStreamBuf(accum);
-          } else if (event === 'error') {
-            accum += `\n\n⚠️ ${payload}`;
-            setStreamBuf(accum);
-          }
+      // parseSseStream is spec-compliant: multi-line data: lines join with
+      // \n natively, so the prior `replace(/\\n/g, '\n')` dance is no longer
+      // needed. Same wire format on the server — no producer change required.
+      for await (const ev of parseSseStream(res.body)) {
+        if (ev.event === 'delta') {
+          accum += ev.data;
+          setStreamBuf(accum);
+        } else if (ev.event === 'error') {
+          accum += `\n\n⚠️ ${ev.data}`;
+          setStreamBuf(accum);
         }
       }
     } catch (e: any) {

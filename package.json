@@ -12,6 +12,7 @@
   },
   "peerDependencies": {
     "@assistant-ui/react": "*",
+    "@restart/sse": "*",
     "lucide-react": "*",
     "react": "^18 || ^19",
     "sonner": "*"
