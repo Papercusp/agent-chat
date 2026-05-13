@@ -96,10 +96,21 @@ export function useHarnessChatRuntime(opts: Options) {
 
     let accum = '';
     try {
-      const res = await fetch(`/api/harness/${slug}/${endpoint}`, {
+      // Phase-4 T1.2: directly POST the projected-tool URL at
+      // /api/agent-tools/<name-with-slashes> instead of the legacy
+      // Hono shim at /api/harness/<slug>/<endpoint>. The harness
+      // slug now ships in the body (the tools declared harnessSlug
+      // as a required arg post-round-12 migration). Accept header
+      // pins SSE — the catch-all returns JSON on missing accept,
+      // which would buffer the whole turn before responding.
+      const res = await fetch(`/api/agent-tools/${endpoint}`, {
         method: 'POST',
-        headers: { 'content-type': 'application/json' },
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'text/event-stream',
+        },
         body: JSON.stringify({
+          harnessSlug: slug,
           history,
           message: text,
           ...(extraBody ?? {}),
