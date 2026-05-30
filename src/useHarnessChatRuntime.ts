@@ -6,7 +6,7 @@ import {
   type ThreadMessageLike,
   type AppendMessage,
 } from '@assistant-ui/react';
-import { parseSseStream } from '@restart/sse';
+import { parseSseStream } from '@papercusp/sse';
 
 export interface HarnessMsg {
   role: 'user' | 'assistant';
