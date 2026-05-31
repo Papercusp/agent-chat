@@ -2,6 +2,7 @@
   "name": "@papercusp/agent-chat",
   "private": true,
   "version": "0.0.1",
+  "description": "Reusable React agent-chat UI components (streaming transcript, tool calls, message composer).",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "exports": {
