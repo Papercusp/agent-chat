@@ -1,4 +1,4 @@
-# @restart/agent-chat
+# @papercusp/agent-chat
 
 Reusable chat UI for harness/director agents. Built on `@assistant-ui/react`
 with custom action-block rendering for `patch:` and `promote:` blocks emitted

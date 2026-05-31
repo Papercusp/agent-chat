@@ -1,4 +1,4 @@
-// @restart/agent-chat — assistant-ui-based chat component for Harness UIs.
+// @papercusp/agent-chat — assistant-ui-based chat component for Harness UIs.
 
 export { HarnessChat } from './HarnessChat';
 export type { ActionBlock } from './HarnessChat';
