@@ -7,6 +7,7 @@
  */
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, render } from '@testing-library/react';
+import React from 'react';
 import { axe } from 'vitest-axe';
 import type { ActionBlock } from './HarnessChat';
 import { splitActionBlocks } from './HarnessChat';

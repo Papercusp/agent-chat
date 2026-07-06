@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import { Check, Loader2, ChevronRight, ChevronDown } from 'lucide-react';
 import type { ActionBlock } from './HarnessChat';
