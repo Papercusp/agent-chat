@@ -1,1 +1,1 @@
-{"version":"4.1.8","results":[[":src/a11y.test.tsx",{"duration":376.1310150000004,"failed":false}],[":src/useHarnessChatRuntime.test.ts",{"duration":41.52003200000013,"failed":false}]]}
+{"version":"4.1.8","results":[[":src/a11y.test.tsx",{"duration":316.5725259999999,"failed":false}],[":src/useHarnessChatRuntime.test.ts",{"duration":36.774560000000065,"failed":false}]]}
