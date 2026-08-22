@@ -64,7 +64,7 @@ export function useHarnessChatRuntime(opts: Options) {
     try { localStorage.removeItem(storageKey); } catch {}
   }, [storageKey]);
 
-  const cancel = useCallback(() => {
+  const cancel = useCallback(async (): Promise<void> => {
     abortRef.current?.abort();
     abortRef.current = null;
     setIsRunning(false);

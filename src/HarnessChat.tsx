@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useCallback, useState } from 'react';
+import { ReactNode } from 'react';
 import {
   AssistantRuntimeProvider,
   ThreadPrimitive,

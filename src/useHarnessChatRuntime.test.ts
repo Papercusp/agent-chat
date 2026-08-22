@@ -124,7 +124,7 @@ describe('useHarnessChatRuntime', () => {
     });
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
-    const [url, init] = fetchMock.mock.calls[0];
+    const [url, init] = fetchMock.mock.calls[0] as unknown as [string, { body: string }];
     expect(String(url)).toBe('/api/agent-tools/architect/chat');
     const body = JSON.parse((init as { body: string }).body);
     expect(body).toMatchObject({ harnessSlug: 'papercup', message: 'do it' });
